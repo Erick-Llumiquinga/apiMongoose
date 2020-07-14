@@ -8,8 +8,8 @@ const mongoose = require('mongoose'),
           {
               nombre: {type: String},
               apellido: {type: String},
-              edad: {type: String},
-              img: {type: String}
+              email: {type: String},
+              password: {type: String}
           }
       );
 

@@ -20,8 +20,6 @@ let connection,
                 useNewUrlParser: true,
                 useFindAndModify: false
             })
-
-            //connection = cliente.db(NAME_DB);
             console.log('conexion exitosa')
         } catch (error) {
             console.log(error);

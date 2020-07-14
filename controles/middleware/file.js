@@ -1,12 +1,11 @@
 ; 
 'use strict'
 
-const Files = require('../modelos/Files'),
-    fs = require('fs'),
+const fs = require('fs'),
     path = require('path'),
     { ObjectId } = require('mongodb');
 
-let uploadData = async (req,res) => {
+let uploadData = async (req,res, next) => {
     let file = req.files.file
 
     if(file.originalFilename == "" || !file.originalFilename)
@@ -23,21 +22,8 @@ let uploadData = async (req,res) => {
             url = url.split('\\');
         let urlFiles = [{'nombre': url[url.length -1]}];
 
-        Files.insertMany(urlFiles)
-        .then(data => {
-            return res.status(200).json({
-                transaction: true,
-                data,
-                msg: 'Archivos guardados'
-            })
-        })
-        .catch(err => {
-            return res.status(400).json({
-                transaction: false,
-                data: null,
-                msg: err
-            })
-        })
+        req.files.file = urlFiles;
+        next();
     }
 }
 
